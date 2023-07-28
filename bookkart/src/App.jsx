@@ -1,19 +1,25 @@
-import { useState } from 'react'
-import Home from './pages/Home';
-import About from './pages/About';
-import './App.css'
-import Loginpage from './pages/Loginpage';
+import {React} from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./component/Navbar";
+import Footer from "./component/Footer";
+import Home from "./pages/home/Home";
+import Book from "./pages/book/Book";
+import Login from "./pages/login/Login";
+
 
 function App() {
 
-  const [toggle, setToggle] = useState(true);
-
   return (
     <div className="App">
-      {/* <p>This is App Page</p> */}
-      {/* <button onClick ={()=>setToggle(!toggle)}>Change Button</button> */}
-      {/* {toggle ? <Home /> : <About />} */}
-      <Loginpage />
+      <BrowserRouter>
+        <Navbar />
+          <Routes>
+            <Route path ="/" element={<Home />} />
+            <Route path ="/book" element={<Book />} />
+            <Route path ="/login" element={<Login />} />
+          </Routes>
+        <Footer />
+      </BrowserRouter>
     </div>
 
   )
