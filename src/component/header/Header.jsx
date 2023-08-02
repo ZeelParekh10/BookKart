@@ -29,8 +29,8 @@ const Header = () => {
           </div>
         </div>
         <div className="bottom">
-          <div class="search-bar">
-            <input type="text" class="search-input" placeholder="What are you looking for" />
+          <div className="search-bar">
+            <input type="text" className="search-input" placeholder="What are you looking for" />
             <Button variant="contained" className="search-button" >Search</Button>
             <Button variant="contained" className="cancel-button">Cancel</Button>
           </div>

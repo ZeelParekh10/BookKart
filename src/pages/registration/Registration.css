@@ -1,0 +1,31 @@
+.registration{
+    width:800px;
+    .register-button{
+        background-color: #f14d54;
+        color:white;
+        margin: 20px 0px ;
+    }
+}
+h3{
+    color: #414141;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+p{
+    font-size: 15px;
+    color:#838383
+}
+
+.input-field {
+    width: 357px;
+    height: 40px;
+    margin:10px 15px 5px 0px;
+    padding: 5px;
+  }
+  
+  .error-message {
+    color: #f14d54;
+  }
+
+

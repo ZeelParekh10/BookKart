@@ -1,155 +1,95 @@
-import React from 'react'
+import {React,useState} from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import "./Registration.css";
+import { Button } from '@material-ui/core';
 
-const RegistrationPage = () => {
+const initialValues = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+};
+
+const validationSchema = Yup.object({
+  firstName: Yup.string().required('Required'),
+  lastName: Yup.string().required('Required'),
+  email: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string().required('Required'),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Required'),
+});
+
+const Registration = () => {
+
+  const [formData, setFormData] = useState(initialValues);
+
+  const handleFormSubmit = (values) => {
+    console.log(values);
+    setFormData(values);
+  };
+
+
   return (
-    <div>
-    <p>Hello</p>
-         <Container maxWidth="lg">
-      <form onSubmit={handleSubmit}>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          <Typography
-            variant="h4"
-            gutterBottom
-            style={{ fontWeight: 600 }}
-            textAlign="center"
-          >
-            Login or Create An Account
-          </Typography>
-          <Box>
-            <Typography variant="h6" gutterBottom style={{ fontWeight: 600 }}>
-              Personal Information
-            </Typography>
-            <hr />
-            <Typography variant="body1" gutterBottom color="grey">
-              Please enter your information to create your account.
-            </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={6}>
-                <Typography variant="body1" gutterBottom>
-                  First Name *
-                </Typography>
-                <TextField
-                  type="text"
-                  size="small"
-                  fullWidth
-                  name="fname"
-                  value={values.fname}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  helperText={errors.fname && touched.fname ? errors.fname :null}
-                  error={errors.fname && touched.fname}
-                />
-              
-              </Grid>
-              <Grid item xs={6}>
-                <Typography variant="body1" gutterBottom>
-                  Last Name *
-                </Typography>
-                <TextField
-                  type="text"
-                  size="small"
-                  fullWidth
-                  name="lname"
-                  value={values.lname}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  helperText={errors.lname && touched.lname ? errors.lname :null}
-                  error={errors.lname && touched.lname}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <Typography variant="body1" gutterBottom>
-                  Email Address *
-                </Typography>
-                <TextField
-                  type="email"
-                  size="small"
-                  fullWidth
-                  name="email"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  helperText={errors.email && touched.email ? errors.email :null}
-                  error={errors.email && touched.email}
-                />
-              </Grid>
-              <Grid item xs={6} >
-                <Typography variant="body1" gutterBottom>
-                  Role *
-                </Typography>
-                <Select
-                  value={values.role}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="role"
-                  size="small"
-                  fullWidth
-                 displayEmpty
-                >
-                  <MenuItem value="User" defaultChecked>User</MenuItem>
-                  <MenuItem value="Admin">Admin</MenuItem>
-                </Select>
-                
-                
-              </Grid>
-            </Grid>
-          </Box>
-          <Box>
-            <Typography variant="h6" gutterBottom style={{ fontWeight: 600 }}>
-              Login Information
-            </Typography>
-            <hr />
+    <div className='registration'>
+      <h3>Personal Information</h3>
+      <hr/>
+      <p>Please enter the follwing information to create your account.</p>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleFormSubmit}
+      >
+        <Form>
+          <div>
+            <Field
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+              className="input-field"
+            />
+            <Field
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              className="input-field"
+            />
+          </div>
+          <ErrorMessage name="firstName" component="div" className="error-message" />
+          <ErrorMessage name="lastName" component="div" className="error-message" />
+          <Field
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            className="input-field"
+          />
+          <ErrorMessage name="email" component="div" className="error-message" />
 
-            <Grid container spacing={3}>
-              <Grid item xs={6}>
-                <Typography variant="body1" gutterBottom>
-                  Password *
-                </Typography>
-                <TextField
-                  type="password"
-                  size="small"
-                  fullWidth
-                  name="pass"
-                  value={values.pass}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  helperText={errors.pass && touched.pass ? errors.pass :null}
-                  error={errors.pass && touched.pass}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <Typography variant="body1" gutterBottom>
-                  Confirm Password *
-                </Typography>
-                <TextField
-                  type="password"
-                  size="small"
-                  fullWidth
-                  name="cpass"
-                  value={values.cpass}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  helperText={errors.cpass && touched.cpass ? errors.cpass :null}
-                  error={errors.cpass && touched.cpass}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-          <Box>
-            <Button
-              type="submit"
-              variant="contained"
-              color="error"
-              sx={{ textTransform: "capitalize", backgroundColor: "#f14d54" }}
-            >
-              Register
-            </Button>
-          </Box>
-        </Box>
-      </form>
-    </Container>
+          <h3>Login Information</h3>
+          <hr/>
+          <Field
+            type="password"
+            name="password"
+            placeholder="Password"
+            className="input-field"
+          />
+          <ErrorMessage name="password" component="div" className="error-message" />
+
+          <Field
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            className="input-field"
+          />
+          <ErrorMessage name="confirmPassword" component="div" className="error-message" />
+
+          <Button variant="contained" className="register-button" type="submit">Register</Button>
+        </Form>
+      </Formik>
     </div>
-  )
-}
+  );
+};
 
-export default RegistrationPage
+export default Registration;
