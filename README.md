@@ -11,7 +11,7 @@ This Project is about E-Book Selling Website based Reactjs, Nodejs &amp; MongoDB
 
 ### BookListing Page
 
-![image](https://github.com/ZeelParekh10/BookKart/assets/90596719/740d654c-2d0f-4511-98a6-060444f1f621)
+![image](https://github.com/ZeelParekh10/BookKart/assets/90596719/552edcc2-d99e-4a4c-873d-a0daab83d0fa)
 
 ### Book Edit / Delete Page
 
