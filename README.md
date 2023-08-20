@@ -1,5 +1,5 @@
 # BookKart
-Welcome to the Bookkart project repository! This web application is designed to provide a platform for selling and purchasing eBooks online. Whether you're an author looking to publish your work or a reader seeking engaging content, this website offers a user-friendly interface to cater to your needs.
+Welcome to the Bookkart project repository! This web application is designed to provide a platform for selling and purchasing eBooks online.
 
 # Features
  - User registration and authentication system.
