@@ -1,32 +1,26 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
-
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
-
+import { Chip } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import logo from "../assets/site-logo.svg";
-
 import { Link } from "react-router-dom";
-
 import { RoutePaths } from "../utils/enum";
 import Shared from "../utils/shared";
 import { useMemo } from "react";
 
 import { useAuthContext } from "../context/auth";
+import { useCartContext } from "../context/cart";
 
 const linkStyle = {
   textDecoration: "none",
 };
 
 const Navbar = () => {
-  const Style = {
-    display: "flex",
-    gap: "20px",
-  };
-
   const authContext = useAuthContext();
+  const cartContext = useCartContext();
 
   const items = useMemo(() => {
     return Shared.NavigationItems.filter(
@@ -40,17 +34,35 @@ const Navbar = () => {
   };
 
   return (
-    <Container maxWidth="100%" style={{backgroundColor:"#ccc"}}>
+    <Container maxWidth="100%"  style={{backgroundColor:"#ccc"}}>
       <Box
         sx={{
           display: "flex",
           justifyContent: "space-between",
           height: "92px",
-          margin:"0px 200px 0px 200px"
+          margin:"0px 100px 0px 100px"
         }}
       >
-        <img src={logo} alt="logo" style={{ width: "180px", fill:"black" }} />
+        <Link
+          to={RoutePaths.BookListing}
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <img src={logo} alt="logo" style={{ width: "180px" }} />
+        </Link>
+
         <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          {!!authContext.user.id && (
+            <Chip
+              label={`Welcome, ${authContext.user.firstName} ${authContext.user.lastName}`}
+              sx={{
+                backgroundColor: "#ccc",
+                fontSize: "16px",
+                color: "#f14d54",
+                fontWeight:"bold"
+              }}
+            />
+          )}
+
           <Stack
             direction="row"
             spacing={1}
@@ -91,24 +103,16 @@ const Navbar = () => {
                 </Link>
               );
             })}
-            {/* <Link to="/book" style={linkStyle}>
-              <Button
-                variant="text"
-                color="error"
-                sx={{ textTransform: "capitalize" }}
-              >
-                Books
-              </Button>
-            </Link> */}
           </Stack>
-          <Link to="/cart" style={linkStyle}>
+          <Link to={RoutePaths.Cart} style={linkStyle}>
             <Button
               variant="outlined"
               color="error"
               startIcon={<ShoppingCartIcon style={{ color: "#c62828" }} />}
-              
             >
-              <span style={{ color: "#c62828", marginRight: "5px" }}>0</span>
+              <span style={{ color: "#c62828", marginRight: "5px" }}>
+                {cartContext.cartData.length}
+              </span>
               Cart
             </Button>
           </Link>
@@ -127,7 +131,6 @@ const Navbar = () => {
         </Box>
       </Box>
     </Container>
-
   );
 };
 

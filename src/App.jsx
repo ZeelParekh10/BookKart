@@ -1,36 +1,35 @@
 import { React, useState } from "react";
-// import "./App.css"
-import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
-import Header from "./component/header/Header";
+import { BrowserRouter } from "react-router-dom";
 import Footer from "./component/footer/Footer";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthWrapper } from "./context/auth";
-import loader from "./assets/images/loader.gif";
-import Book from "./pages/book/Book";
-// import AppWrapper from "./component/AppWrapper";
+import { CartWrapper } from "./context/cart";
+// import loader from "./assets/images/loader.gif";
+import AppWrapper from "./component/AppWrapper";
 import MainNavigation from "./component/MainNavigation";
 import Navbar from "./component/Navbar";
 // import SearchBar from "./component/SearchBar";
 
 function App() {
-  const [hasAccount, setHasAccount] = useState(false);
-
   return (
     <div className="App">
       <BrowserRouter>
       <AuthWrapper>
-        {/* <div className="loader-wrapper">
-          <img src={loader} alt="loader" />
-        </div> */}
-        {/* <Header setHasAccount={setHasAccount} /> */}
-        <Navbar/>
-        {/* <SearchBar/> */}
-        <MainNavigation />
-        <ToastContainer/>
-        <Footer />
+        <CartWrapper>
+          {/* <div className="loader-wrapper">
+            <img src={loader} alt="loader" />
+          </div> */}
+          <AppWrapper>
+            <Navbar />
+            {/* <SearchBar /> */}
+            <MainNavigation />
+            <ToastContainer />
+            <Footer />
+            </AppWrapper>
+        </CartWrapper>
       </AuthWrapper>
-      </BrowserRouter>
+    </BrowserRouter>
     </div>
   );
 }

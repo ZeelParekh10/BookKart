@@ -13,7 +13,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Shared from "../../utils/shared";
 import bookService from "../../services/book.service";
-import categoryService from "../../services/category-service";
+import categoryService from "../../services/category.service";
 
 const bookSchema = Yup.object().shape({
   name: Yup.string().required("Book Name is required"),
@@ -70,7 +70,7 @@ const EditBook = () => {
   } = useFormik({
     initialValues: initialValueState,
     validationSchema: bookSchema,
-
+    enableReinitialize:true,
     onSubmit: (values) => {
       bookService
         .save(values)
@@ -271,7 +271,13 @@ const EditBook = () => {
               type="submit"
               variant="contained"
               color="success"
-              sx={{ textTransform: "capitalize" }}
+              sx={{
+                textTransform: "capitalize",
+                backgroundColor: "#80bf32",
+                "&:hover": {
+                  backgroundColor: "#339933",
+                },
+              }}
             >
               Save
             </Button>
@@ -297,115 +303,3 @@ const EditBook = () => {
 };
 
 export default EditBook;
-
-
-
-
-// import { React, useState } from "react";
-// import "./EditProduct.css";
-// import { Formik, Form, Field, ErrorMessage } from "formik";
-// import * as Yup from "yup";
-// import { Button } from "@material-ui/core";
-// import { Label } from "@material-ui/icons";
-
-// const initialValues = {
-//   firstName: "",
-//   lastName: "",
-//   shopCategory: "",
-//   description: "",
-//   uploadedFile: null,
-// };
-
-// const validationSchema = Yup.object({
-//   firstName: Yup.string().required("First Name is required"),
-//   lastName: Yup.string().required("Last Name is required"),
-//   shopCategory: Yup.string().required("Shop Category is required"),
-//   description: Yup.string().required("Description is required"),
-//   uploadedFile: Yup.mixed().required("File is required"),
-// });
-
-// const EditProduct = () => {
-//   const [formData, setFormData] = useState(initialValues);
-
-//   const handleSubmit = (values) => {
-//     console.log(values);
-//     setFormData(values);
-//   };
-
-//   return (
-//     <div className="editProductPage">
-//       <div className="editPage">
-//         <div className="head">
-//           <h1>Edit Product</h1>
-//         </div>
-//         <div className="editForm">
-//           <Formik
-//             initialValues={initialValues}
-//             validationSchema={validationSchema}
-//             onSubmit={handleSubmit}
-//           >
-//             <Form>
-//             <div>
-//                 <Field
-//                   type="text"
-//                   name="firstName"
-//                   placeholder="First Name"
-//                   className="input-field"
-//                 />
-//                 <ErrorMessage name="firstName" component="div" />
-    
-//                 <Field
-//                   type="text"
-//                   name="lastName"
-//                   placeholder="Last Name"
-//                   className="input-field"
-//                 />
-//                 <ErrorMessage name="lastName" component="div" />
-//               </div>
-//               <div>
-//                 <Field
-//                   name="shopCategory"
-//                   component="select"
-//                   className="input-field-select"
-//                 >
-//                   <option value="">Select Category</option>
-//                   <option value="electronics">Electronics</option>
-//                   <option value="clothing">Clothing</option>
-//                   <option value="books">Books</option>
-//                 </Field>
-//               <ErrorMessage name="shopCategory" component="div"/>
-
-
-//                 <Field
-//                   type="text"
-//                   name="description"
-//                   placeholder="Description"
-//                   className="input-field"
-//                 />
-//               <ErrorMessage name="description" component="div" />
-
-//               </div>
-
-//               <div style={{position:"relative", display:"inline-block"}}>
-//                 <Field type="file" id="uploadFile" name="uploadFile" className="hiddenInput" />
-//                 {/* <input type="file" name="uploadFile" id="uploadFile" className="hiddenInput" /> */}
-//                 <label htmlFor="uploadFile" className="uploadButton">Upload File</label>
-//                 <ErrorMessage name="uploadedFile" component="div" />
-//               </div>
-//               <div style={{marginTop:"35px"}}>
-//               <Button variant="contained" type="submit" style={{width:"100px", height:"40px", backgroundColor:"#80BF32", marginRight:"5px"}}>
-//                   Save
-//                 </Button>
-//                 <Button variant="contained" type="submit" style={{width:"100px", height:"40px", backgroundColor:"#f14d54", marginLeft:"5px"}}>
-//                   Cancel
-//                 </Button>
-//               </div>
-//             </Form>
-//           </Formik>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default EditProduct;

@@ -1,7 +1,7 @@
 import BookCard from "../../component/BookCard";
 
 import bookService from "../../services/book.service";
-import categoryService from "../../services/category-service";
+import categoryService from "../../services/category.service";
 import { useEffect, useMemo, useState } from "react";
 import {
   Box,
@@ -99,15 +99,19 @@ const BookListing = () => {
 
   return (
     <Container maxWidth="lg" sx={{ paddingY: "1rem" }}>
-      <Typography variant="h3" sx={{ textAlign: "center" }} style={{margin:"40px 0 30px 0"}}>
-        Book Listing
-      </Typography>
+      <Typography
+          variant="h4"
+          gutterBottom
+          style={{ fontWeight: 600 }}
+          textAlign="center"
+        >
+          Books
+        </Typography>
 
       <Grid
         container
         sx={{ width: "100%", marginY: "1rem" }}
-        columnSpacing={{ xs: 1, sm: 3, md: 5 }}
-        style={{margin:"30px 0 60px 0"}}
+        columnSpacing={{ xs: 1, sm: 2, md: 5 }}
       >
         <Grid item md={4}>
           <Typography variant="h6">
@@ -133,31 +137,28 @@ const BookListing = () => {
           <Select
             size="small"
             sx={{ width: "100%" }}
-            onChange={sortBooks}
-            value={sortBy}
+            onChange={filterByCategory}
+            value={category}
           >
-            <MenuItem value="a-z">A - Z</MenuItem>
-            <MenuItem value="z-a">Z - A</MenuItem>
+            <MenuItem value={0}>All</MenuItem>
+            {categories.map((ele) => {
+              return <MenuItem value={ele.id}>{ele.name}</MenuItem>;
+            })}
           </Select>
         </Grid>
       </Grid>
       <Grid
         container
-        // item xs={12} sm={6} md={3}
-        rowSpacing={{ xs: 1, sm: 3, md: 5 }}
-        columnSpacing={{ xs: 1, sm: 3, md: 5 }}
+        rowSpacing={{ xs: 1, sm: 2, md: 5 }}
+        columnSpacing={{ xs: 1, sm: 2, md: 5 }}
         alignItems="stretch"
         sx={{ minHeight: "2rem" }}
       >
         {books.map((ele) => {
           return (
-            <Grid item sm={8} md={4} key={ele.name}>
+            <Grid item sm={12} md={4} key={`card-${ele.id}`}>
               <BookCard
-                name={ele.name}
-                price={ele.price}
-                category={ele.category}
-                description={ele.description}
-                img={ele.base64image}
+                book={ele}
               />
             </Grid>
           );

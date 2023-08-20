@@ -3,11 +3,26 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Box } from '@mui/material';
-// import { Box, Chip, Stack } from "@mui/material";
+import { Box, Chip } from '@mui/material';
+import { useAuthContext } from '../context/auth';
+import { useCartContext } from '../context/cart';
+import shared from '../utils/shared';
+import { toast } from "react-toastify";
 
+const BookCard = ({book}) => {
+  const authContext = useAuthContext();
+  const cartContext = useCartContext();
 
-const BookCard = ({ name, price, description, category, img }) => {
+  const addToCart = (book) => {
+    shared.addToCart(book, authContext.user.id).then((res) => {
+      if (res.error) {
+        toast.error(res.message);
+      } else {
+        toast.success(res.message);
+        cartContext.updateCart();
+      }
+    });
+  };
   
   return (
     <div>
@@ -15,24 +30,27 @@ const BookCard = ({ name, price, description, category, img }) => {
       <CardMedia
         component="img"
         height="300"
-        image={img}
+        image={book.base64image}
         alt="Image"
       />
       <CardContent>
         <Typography variant="h6" component="div">
-          {name}
+          {book.name}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical' }}>
-          {description}
+        {book.description}
         </Typography>
         <Box display="flex" justifyContent="space-between" alignItems="center" style={{marginTop:"20px"}}>
-          <Button variant="contained"color="success">
-            Add to Cart
-          </Button>
-          <Typography variant="h6" component="div">
-            {"₹ "+price}
+        <Chip label={book.category} sx={{ backgroundColor: "#e0e8eb" }} />
+          <Typography variant="h6" component="div" >
+            {"₹ "+book.price}
           </Typography>
         </Box>
+        <Box display="flex" justifyContent="center" alignItems="center" style={{marginTop:"20px"}}>
+        <Button variant="contained"color="success" style={{width:"80%"}} onClick={() =>{addToCart(book)}}>
+            Add to Cart
+          </Button>
+          </Box>
       </CardContent>
     </Card>
         </div>
@@ -45,42 +63,3 @@ export default BookCard;
 
 
 
-
-
-
-// import React from "react";
-// import { ProductCard } from "react-ui-cards";
-// import { Card, CardActionArea, CardContent, CardMedia, Typography, CardActions, Button } from "@material-ui/core";
-
-// const BookCard = () => {
-//   return (
-//     <div>
-//       <Card sx={{ maxWidth: 50 }}>
-//         <CardActionArea>
-//           <CardMedia
-//             component="img"
-//             height="200"
-//             image="https://picsum.photos/200"
-//             alt=""
-//           />
-//         <CardContent>
-//           <Typography gutterBottom variant="h5" component="div">
-//             Book 1
-//           </Typography>
-//           <Typography variant="body2" color="text.secondary">
-//             Lizards are a widespread group of squamate reptiles, with over 6,000
-//             species, ranging across all continents except Antarctica
-//           </Typography>
-//         </CardContent>
-//         </CardActionArea>
-//         <CardActions>
-//         <Button size="small" color="primary">
-//           Add to Cart
-//         </Button>
-//       </CardActions>
-//       </Card>
-//     </div>
-//   );
-// };
-
-// export default BookCard;
