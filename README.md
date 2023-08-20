@@ -36,7 +36,7 @@ Welcome to the Bookkart project repository! This web application is designed to 
 
 ### Registration Page
 
-![image](https://github.com/ZeelParekh10/BookKart/assets/90596719/c39b3c24-8924-4807-93d9-d945cb15479c)
+![image](https://github.com/ZeelParekh10/BookKart/assets/90596719/63886cae-39b7-4766-8b7f-9a003b4a3b5e)
 
 ### BookListing Page
 
