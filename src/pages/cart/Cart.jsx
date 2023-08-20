@@ -122,7 +122,7 @@ import {
             style={{ fontWeight: 600 }}
             textAlign="center"
           >
-            Cart Page
+            Cart
           </Typography>
         </Box>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>

@@ -25,7 +25,7 @@ const initialValues = {
 const loginSchema = Yup.object({
   email: Yup.string().email().required("Please enter your email"),
   password: Yup.string()
-    .min(6)
+    .min(3)
     .required("Please enter password with min 6 char"),
 });
 const Login = () => {

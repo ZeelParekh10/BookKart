@@ -86,7 +86,7 @@ const Book = () => {
           style={{ fontWeight: 600 }}
           textAlign="center"
         >
-          Book Page
+          Edit / Remove Books
         </Typography>
       </Box>
       <Box
