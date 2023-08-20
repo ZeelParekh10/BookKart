@@ -1,5 +1,34 @@
 # BookKart
-This Project is about E-Book Selling Website based Reactjs, Nodejs &amp; MongoDB
+Welcome to the Bookkart project repository! This web application is designed to provide a platform for selling and purchasing eBooks online. Whether you're an author looking to publish your work or a reader seeking engaging content, this website offers a user-friendly interface to cater to your needs.
+
+# Features
+ - User registration and authentication system.
+ - Author dashboard for eBook management.
+ - Admin Panel for user management.
+ - User-friendly interface for browsing eBooks by genre.
+ - Search functionality for finding eBooks by name or genre.
+
+# Technologies Used
+ - Reactjs, Nodejs
+ - Book API
+ - Material UI for responsive design
+ - Formik for form handling
+
+# Getting Started
+ - Clone the repository
+ - Navigate to the project directory
+ - Install dependencies: "npm install"
+ - Start the server: "npm run dev"
+
+# Usage
+ - Register as a seller or buyer.
+ - Sellers can edit or add books.
+ - Buyers can select books, add to cart and place order.
+ - For Admin Panel, login creds:
+     - admin@tatvasoft.com
+     - admin@123
+
+
 
 ### Login Page
 
